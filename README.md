@@ -14,5 +14,5 @@ This application uses Spring Boot to develop a REST service for FAQs. The servic
 
 ## References
 
-- [Spring Boot Documentation] (https://spring.io/guides/gs/spring-boot/)
+- [Spring Boot Documentation](https://spring.io/guides/gs/spring-boot/)
 
