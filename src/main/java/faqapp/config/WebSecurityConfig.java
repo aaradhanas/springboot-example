@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
 /**
  * Created by AAS on 2/12/2018.
@@ -15,15 +16,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private BasicAuthenticationEntryPoint authenticationEntryPoint;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-       /* http.authorizeRequests().antMatchers("/","/home").permitAll().anyRequest().authenticated()
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/faq","/faq/*")
+                .authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
-                .logout().permitAll();*/
-        http.authorizeRequests().antMatchers("/faq/*").permitAll();
-        http.csrf().disable();
+                .httpBasic()
+                .authenticationEntryPoint(authenticationEntryPoint);
     }
 
     @Autowired
