@@ -1,6 +1,5 @@
 package faqapp.bean;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class FAQ {
 
     @Id
-    private ObjectId id;
+    private String id;
 
     private String question;
 
@@ -20,17 +19,17 @@ public class FAQ {
 
     public FAQ(){}
 
-    public FAQ(ObjectId id, String question, String answer) {
+    public FAQ(String id, String question, String answer) {
         this.id = id;
         this.question = question;
         this.answer = answer;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 

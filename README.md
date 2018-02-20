@@ -6,11 +6,10 @@ This application uses Spring Boot to develop a REST service for FAQs. The servic
 - /faq POST new FAQ
 - /faq/{id} DELETE FAQ by id
 
-## TODO
+## MongoDB Integration
 
-- For now, the data is stored in a local variable. This should be enhanced to store in DB.
-- Enforce authentication mechanisms.
-- Understand different Spring boot annotations.
+- MongoConfig to provide MongoDB instance, port and database
+- MongoRepository interface to perform CRUD operations
 
 ## References
 

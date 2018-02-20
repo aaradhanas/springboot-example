@@ -5,6 +5,8 @@ import faqapp.repository.FaqRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by AAS on 2/19/2018.
  */
@@ -18,7 +20,18 @@ public class FaqService {
         this.faqRepository = faqRepository;
     }
 
+    public List<FAQ> getFAQs(){
+        return faqRepository.findAll();
+    }
     public FAQ getFAQ(String id){
         return faqRepository.findOneById(id);
+    }
+
+    public FAQ saveFAQ(FAQ newFAQ){
+        return faqRepository.insert(newFAQ);
+    }
+
+    public void deleteFAQ(String id){
+        faqRepository.delete(id);
     }
 }
