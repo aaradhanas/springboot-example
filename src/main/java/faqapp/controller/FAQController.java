@@ -2,16 +2,18 @@ package faqapp.controller;
 
 import faqapp.bean.FAQ;
 import faqapp.service.FaqService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/faq")
 public class FAQController {
 
-    private List<FAQ> faqs = new ArrayList<>();
     private FaqService faqService;
 
     public FAQController(FaqService faqService){
@@ -24,9 +26,17 @@ public class FAQController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public FAQ getFAQ(@PathVariable("id") String id){
-        //return this.faqs.stream().filter(faq -> id == faq.getId()).findFirst().orElse(null);
-        return this.faqService.getFAQ(id);
+    @ResponseBody
+    public ResponseEntity<FAQ> getFAQ(@PathVariable("id") String id){
+        Optional<FAQ> optionalFaq = this.faqService.getFAQ(id);
+        FAQ faq = optionalFaq.isPresent() ? optionalFaq.get() : null;
+
+        if(faq != null){
+            return ResponseEntity.ok(faq);
+        }
+        else{
+            return new ResponseEntity<FAQ>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST)

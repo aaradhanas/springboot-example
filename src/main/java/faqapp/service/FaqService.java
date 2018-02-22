@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by AAS on 2/19/2018.
@@ -23,7 +24,7 @@ public class FaqService {
     public List<FAQ> getFAQs(){
         return faqRepository.findAll();
     }
-    public FAQ getFAQ(String id){
+    public Optional<FAQ> getFAQ(String id){
         return faqRepository.findOneById(id);
     }
 

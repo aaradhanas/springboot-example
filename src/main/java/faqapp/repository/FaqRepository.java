@@ -15,7 +15,7 @@ public interface FaqRepository extends MongoRepository<FAQ, String> {
 
     List<FAQ> findAll();
 
-    FAQ findOneById(String id);
+    Optional<FAQ> findOneById(String id);
 
     FAQ insert(FAQ faq);
 
