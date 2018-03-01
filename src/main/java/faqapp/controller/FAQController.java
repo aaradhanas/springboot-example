@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,16 +25,15 @@ public class FAQController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<FAQ> getFAQ(@PathVariable("id") String id){
+    public ResponseEntity getFAQ(@PathVariable("id") String id){
         Optional<FAQ> optionalFaq = this.faqService.getFAQ(id);
         FAQ faq = optionalFaq.isPresent() ? optionalFaq.get() : null;
 
         if(faq != null){
-            return ResponseEntity.ok(faq);
+            return ResponseEntity.ok().body(faq);
         }
         else{
-            return new ResponseEntity<FAQ>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -45,7 +43,16 @@ public class FAQController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    public void deleteFAQ(@PathVariable("id") String id){
-        this.faqService.deleteFAQ(id);
+    public ResponseEntity deleteFAQ(@PathVariable("id") String id){
+        Optional<FAQ> optionalFaq = this.faqService.getFAQ(id);
+        FAQ faq = optionalFaq.isPresent() ? optionalFaq.get() : null;
+
+        if(faq != null) {
+            this.faqService.deleteFAQ(id);
+            return ResponseEntity.noContent().build();
+        }
+        else{
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document( collection = "faqs")
 public class FAQ {
 
+    //id will be used for storing MongoDB _id
     @Id
     private String id;
 
