@@ -19,12 +19,14 @@ public class FAQController {
         this.faqService = faqService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/", method = RequestMethod.GET, produces = "application/json")
+    @ResponseStatus(value = HttpStatus.OK)
     public List<FAQ> getFaqs(){
         return this.faqService.getFAQs();
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET, produces = "application/json")
+    @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity getFAQ(@PathVariable("id") String id){
         Optional<FAQ> optionalFaq = this.faqService.getFAQ(id);
         FAQ faq = optionalFaq.isPresent() ? optionalFaq.get() : null;
@@ -37,12 +39,14 @@ public class FAQController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="/", method = RequestMethod.POST, consumes = "application/json")
+    @ResponseStatus(value = HttpStatus.OK)
     public FAQ saveFAQ(@RequestBody FAQ faq){
         return this.faqService.saveFAQ(faq);
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ResponseEntity deleteFAQ(@PathVariable("id") String id){
         Optional<FAQ> optionalFaq = this.faqService.getFAQ(id);
         FAQ faq = optionalFaq.isPresent() ? optionalFaq.get() : null;
