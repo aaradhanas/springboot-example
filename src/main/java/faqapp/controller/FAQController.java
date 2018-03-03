@@ -4,6 +4,10 @@ import faqapp.bean.FAQ;
 import faqapp.service.FaqService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +17,21 @@ import java.util.Optional;
 @RequestMapping(value = "/faq")
 public class FAQController {
 
-    private FaqService faqService;
+    private final FaqService faqService;
 
-    public FAQController(FaqService faqService){
+    private final AuthenticationManager authenticationManager;
+
+    public FAQController(FaqService faqService, AuthenticationManager authenticationManager){
+        this.authenticationManager = authenticationManager;
         this.faqService = faqService;
+    }
+
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    public void authenticateUser(){
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("user", "user");
+
+        Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     @RequestMapping(value="/", method = RequestMethod.GET, produces = "application/json")
