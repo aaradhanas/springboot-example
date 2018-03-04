@@ -11,9 +11,14 @@ This application uses Spring Boot to develop a REST service for FAQs. The servic
 - MongoConfig to provide MongoDB instance, port and database
 - MongoRepository interface to perform CRUD operations
 
+## Security - TODO
+- Enforce Basic Auth / JWT authentication
+- Set security context for retrieving authorities
+
 ## References
 
 - [Spring Boot Documentation](https://spring.io/guides/gs/spring-boot/)
 - https://www.journaldev.com/4144/spring-data-mongodb-example
 - http://www.baeldung.com/spring-data-mongodb-tutorial
+- JHipster application
 
