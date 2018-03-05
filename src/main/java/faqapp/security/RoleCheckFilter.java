@@ -24,15 +24,16 @@ public class RoleCheckFilter extends GenericFilterBean {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
-        //Change this to include basic auth / JWT
-        String token = resolveToken(httpServletRequest);
+        /*String token = resolveToken(httpServletRequest);
         if("user".equals(token)) {
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("user", "user"));
             filterChain.doFilter(servletRequest, servletResponse);
         }else {
             httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
             return;
-        }
+        }*/
+
+        filterChain.doFilter(servletRequest, servletResponse);
 
     }
 

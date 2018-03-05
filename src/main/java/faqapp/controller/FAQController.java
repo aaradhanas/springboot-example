@@ -19,19 +19,8 @@ public class FAQController {
 
     private final FaqService faqService;
 
-    private final AuthenticationManager authenticationManager;
-
-    public FAQController(FaqService faqService, AuthenticationManager authenticationManager){
-        this.authenticationManager = authenticationManager;
+    public FAQController(FaqService faqService){
         this.faqService = faqService;
-    }
-
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public void authenticateUser(){
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("user", "user");
-
-        Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     @RequestMapping(value="/", method = RequestMethod.GET, produces = "application/json")

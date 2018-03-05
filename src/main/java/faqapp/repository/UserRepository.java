@@ -4,6 +4,8 @@ import faqapp.bean.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Created by AAS on 3/4/2018.
  */
@@ -11,5 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
 
-    User findOneByUserName(String username);
+    User insert(User user);
+
+    Optional<User> findOneByUsername(String username);
 }
